@@ -1,0 +1,52 @@
+.menu {
+  background-color: black;
+  color: white;
+  display: flex;
+  /* align-items: flex-end; */
+  flex-flow: row wrap;
+  justify-content: flex-end;
+}
+
+.logo {
+  order: 1;
+  display: flex;
+  padding: 5px;
+  margin-left: 5px;
+}
+
+.logoName {
+  padding: 5px;
+  margin-left: 5px;
+  font-family: "Sacramento", cursive;
+  font-size: 60px;
+}
+
+.links {
+  order: 2;
+  flex-grow: 1;
+  padding: 5px;
+  margin-left: 5px;
+  margin-right: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.link {
+  text-align: center;
+  padding: 5px;
+  margin-left: 10px;
+  font-family: "Gotu", sans-serif;
+  font-size: 20px;
+  color: aqua;
+  text-decoration: none;
+  border-bottom: 2px solid green;
+}
+
+.link:hover {
+  border-color: aliceblue;
+}
+
+.text {
+  margin-left: 5px;
+}

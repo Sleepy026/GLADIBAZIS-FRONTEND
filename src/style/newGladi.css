@@ -1,0 +1,60 @@
+.main {
+  height: 300px;
+  width: 400px;
+  margin: 5px;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  font-family: "Gotu", sans-serif;
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.inputField {
+  padding: 5px;
+  margin: 5px;
+}
+
+.imageComp {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.imageField {
+  border: 1px solid #ccc;
+  color: white;
+  display: inline-block;
+  padding: 5px;
+  margin: 5px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.submit {
+  padding: 5px;
+  margin: 5px;
+  color: white;
+  background-color: black;
+  border: 1px solid green;
+}
+
+.submit:hover {
+  border-color: white;
+}
+
+.message {
+  color: white;
+  padding: 5px;
+  margin: 5px;
+  text-align: center;
+}
