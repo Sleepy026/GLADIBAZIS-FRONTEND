@@ -2,6 +2,7 @@ import * as React from "react";
 import { useState } from "react";
 import axios from "axios";
 import "../style/newGladi.css";
+import { storage } from "../setup/setupFirebase";
 
 interface Props {}
 
@@ -9,10 +10,11 @@ const NewGladi: React.FC<Props> = () => {
   const [name, setName] = useState<string | null>(null);
   const [color, setColor] = useState<string | null>(null);
   const [heigth, setHeigth] = useState<number | null>(null);
-  const [message, setMessage] = useState<String | null>(
+  const [message, setMessage] = useState<string | null>(
     "Select a file to upload"
   );
-  const [image, setImage] = useState<File | null>(null);
+  const [image, setImage] = useState<any | null>(null);
+  const [url, setUrl] = useState<any>([]);
   const acceptedFiles = "image/png, image/jpg, image/jpeg";
 
   const handleSubmit = () =>
@@ -26,10 +28,25 @@ const NewGladi: React.FC<Props> = () => {
       .catch(error => console.log(error));
 
   const handleUpload = () => {
-    axios
-      .post(``, { image: image })
-      .then(res => console.log(res))
-      .catch(error => console.log(error));
+    const uploadTask = storage.ref(`images/${image?.name}`).put(image);
+    uploadTask.on(
+      "state_changed",
+      snapshot => {},
+      error => {
+        console.log(error);
+      },
+      () => {
+        storage
+          .ref("images")
+          .child(image.name)
+          .getDownloadURL()
+          .then(imageURL => {
+            // console.log(url);
+            setUrl([...url, imageURL]);
+            setMessage("Upload success! Choose new file to upload");
+          });
+      }
+    );
   };
 
   return (
@@ -75,12 +92,12 @@ const NewGladi: React.FC<Props> = () => {
           }}
           accept={acceptedFiles}
         />
-        {/* <button className="submit" type="submit" onClick={handleUpload}>
-          Upload
-        </button> */}
         <div className="message">
           <p>{message}</p>
         </div>
+        <button className="submit" type="submit" onClick={handleUpload}>
+          Upload Image
+        </button>
       </div>
 
       <button className="submit" type="submit" onClick={handleSubmit}>

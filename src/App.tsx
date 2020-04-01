@@ -11,17 +11,6 @@ import Home from "./components/Home";
 interface Props {}
 
 const App: React.FC<Props> = () => {
-  const firebase = require("firebase");
-  const firebaseConfig = {
-    apiKey: "AIzaSyCoAIsbFurWtjEWFfhUofirhw6ejtpYtVA",
-    authDomain: "gladibazis.firebaseapp.com",
-    databaseURL: "https://gladibazis.firebaseio.com",
-    projectId: "gladibazis",
-    storageBucket: "gladibazis.appspot.com",
-    messagingSenderId: "906180955378",
-    appId: "1:906180955378:web:0bf40aa85ef0cafe96946b",
-    measurementId: "G-F3F7GZ23WD"
-  };
   return (
     <div className="outer">
       <Router>
