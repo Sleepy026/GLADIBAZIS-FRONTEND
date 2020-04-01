@@ -7,12 +7,10 @@ import { storage } from "../setup/setupFirebase";
 interface Props {}
 
 const NewGladi: React.FC<Props> = () => {
-  const [name, setName] = useState<string | null>(null);
-  const [color, setColor] = useState<string | null>(null);
-  const [heigth, setHeigth] = useState<number | null>(null);
-  const [message, setMessage] = useState<string | null>(
-    "Select a file to upload"
-  );
+  const [name, setName] = useState<string>("");
+  const [color, setColor] = useState<string>("");
+  const [heigth, setHeigth] = useState<number>(NaN);
+  const [message, setMessage] = useState<string>("Select a file to upload");
   const [image, setImage] = useState<any | null>(null);
   const [url, setUrl] = useState<any>([]);
   const acceptedFiles = "image/png, image/jpg, image/jpeg";
@@ -22,9 +20,17 @@ const NewGladi: React.FC<Props> = () => {
       .post(`http://localhost:8080/create_new_gladi`, {
         name: name,
         color: color,
-        heigth: heigth
+        heigth: heigth,
+        pictures: url
       })
-      .then(res => setMessage(res.data))
+      .then(res => {
+        setMessage(res.data);
+        setName("");
+        setColor("");
+        setHeigth(NaN);
+        setUrl([]);
+        setImage(null);
+      })
       .catch(error => console.log(error));
 
   const handleUpload = () => {
@@ -56,6 +62,7 @@ const NewGladi: React.FC<Props> = () => {
           className="inputField"
           type="text"
           name="name"
+          value={name}
           placeholder="Name"
           onChange={e => setName(e.target.value)}
           required
@@ -65,6 +72,7 @@ const NewGladi: React.FC<Props> = () => {
           type="text"
           name="color"
           placeholder="Color"
+          value={color}
           onChange={e => setColor(e.target.value)}
           required
         />
@@ -72,6 +80,7 @@ const NewGladi: React.FC<Props> = () => {
           className="inputField"
           type="number"
           name="height"
+          value={heigth}
           placeholder="Height"
           onChange={e => setHeigth(parseInt(e.target.value))}
           required

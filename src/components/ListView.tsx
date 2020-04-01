@@ -22,7 +22,7 @@ const ListView: React.FC<Props> = () => {
     <div className="list">
       {gladiData?.map((gladi: GladiDataType) => (
         <div className="card">
-          <img src={gladi.pictures} alt="pic" height="200" width="200" />
+          <img src={gladi.pictures[0]} alt="pic" height="200" width="200" />
           <Link
             className="name"
             key={gladi.name}
