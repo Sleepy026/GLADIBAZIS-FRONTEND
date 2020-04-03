@@ -14,7 +14,7 @@ const DetailedView: React.FC<Props> = props => {
     <div>
       <p>Name: {flower.name}</p>
       <p>Color: {flower.color}</p>
-      <p>Heigth: {flower.height}</p>
+      <p>Height: {flower.height}</p>
       <p>Comments: {flower.comments}</p>
     </div>
   );

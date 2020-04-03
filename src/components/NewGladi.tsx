@@ -9,26 +9,26 @@ interface Props {}
 const NewGladi: React.FC<Props> = () => {
   const [name, setName] = useState<string>("");
   const [color, setColor] = useState<string>("");
-  const [heigth, setHeigth] = useState<number>(NaN);
+  const [height, setHeight] = useState<number>(0);
   const [message, setMessage] = useState<string>("Select a file to upload");
   const [image, setImage] = useState<any | null>(null);
-  const [url, setUrl] = useState<any>([]);
+  const [pictures, setPictures] = useState<any>([]);
   const acceptedFiles = "image/png, image/jpg, image/jpeg";
 
   const handleSubmit = () =>
     axios
       .post(`http://localhost:8080/create_new_gladi`, {
-        name: name,
-        color: color,
-        heigth: heigth,
-        pictures: url
+        name,
+        color,
+        height,
+        pictures
       })
       .then(res => {
         setMessage(res.data);
         setName("");
         setColor("");
-        setHeigth(NaN);
-        setUrl([]);
+        setHeight(0);
+        setPictures([]);
         setImage(null);
       })
       .catch(error => console.log(error));
@@ -48,7 +48,7 @@ const NewGladi: React.FC<Props> = () => {
           .getDownloadURL()
           .then(imageURL => {
             // console.log(url);
-            setUrl([...url, imageURL]);
+            setPictures([...pictures, imageURL]);
             setMessage("Upload success! Choose new file to upload");
           });
       }
@@ -80,9 +80,9 @@ const NewGladi: React.FC<Props> = () => {
           className="inputField"
           type="number"
           name="height"
-          value={heigth}
+          value={height}
           placeholder="Height"
-          onChange={e => setHeigth(parseInt(e.target.value))}
+          onChange={e => setHeight(parseInt(e.target.value))}
           required
         />
       </div>
