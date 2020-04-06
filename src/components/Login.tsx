@@ -10,9 +10,6 @@ const Login: React.FC<Props> = () => {
       .auth()
       .signInWithPopup(provider)
       .then(function(result) {
-        // var token = result?.credential?.;
-
-        // var user = result.user;
         console.log(result);
       })
       .catch(function(error) {
