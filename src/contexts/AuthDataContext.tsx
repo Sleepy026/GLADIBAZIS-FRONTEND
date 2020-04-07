@@ -5,15 +5,15 @@ import firebase from "firebase";
 export const AuthDataContext = createContext({
   onLogin: () => {},
   onLogout: () => {},
-  authData: {},
+  authData: {} || null,
 });
 
-const initialAuthData = {};
+const initialAuthData = null;
 interface Propsz {}
 
 const AuthDataProvider: React.FC<Propsz> = (props) => {
   const [authData, setAuthData] = useState<
-    firebase.auth.UserCredential | firebase.User | {}
+    firebase.auth.UserCredential | firebase.User | {} | null
   >(initialAuthData);
 
   useEffect(() => {
