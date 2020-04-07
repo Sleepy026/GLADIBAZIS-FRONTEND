@@ -1,26 +1,19 @@
-import React, {
-  createContext,
-  useState,
-  useEffect,
-  useMemo,
-  useContext,
-} from "react";
+import React, { createContext, useState, useEffect, useContext } from "react";
 
 import firebase from "firebase";
 
-export const AuthDataContext = createContext(null);
+export const AuthDataContext = createContext({
+  onLogin: () => {},
+  onLogout: () => {},
+  authData: {},
+});
 
 const initialAuthData = {};
+interface Propsz {}
 
-interface Props {}
-
-const AuthDataProvider: React.FC<Props> = () => {
+const AuthDataProvider: React.FC<Propsz> = (props) => {
   const [authData, setAuthData] = useState(initialAuthData);
 
-  /* The first time the component is rendered, it tries to
-   * fetch the auth data from a source, like a cookie or
-   * the localStorage.
-   */
   useEffect(() => {
     const currentAuthData = firebase.auth().currentUser;
     if (currentAuthData) {
@@ -28,7 +21,7 @@ const AuthDataProvider: React.FC<Props> = () => {
     }
   }, []);
 
-  const onLogin = () => {
+  function onLogin(): void {
     var provider = new firebase.auth.GoogleAuthProvider();
     firebase
       .auth()
@@ -43,9 +36,9 @@ const AuthDataProvider: React.FC<Props> = () => {
         var email = error.email;
         var credential = error.credential;
       });
-  };
+  }
 
-  const onLogout = () => {
+  function onLogout(): void {
     firebase
       .auth()
       .signOut()
@@ -55,15 +48,9 @@ const AuthDataProvider: React.FC<Props> = () => {
       .catch(function (error) {
         // An error happened.
       });
-  };
+  }
 
-  //   const onLogout = () => setAuthData(initialAuthData);
-
-  //   const onLogin = newAuthData => setAuthData(newAuthData);
-
-  const authDataValue = useMemo({ ...authData, onLogin, onLogout }, [authData]);
-
-  return <AuthDataContext.Provider value={authDataValue} />;
+  return <AuthDataContext.Provider value={{ authData, onLogin, onLogout }} />;
 };
 
 export const useAuthDataContext = () => useContext(AuthDataContext);
