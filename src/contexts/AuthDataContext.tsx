@@ -50,7 +50,11 @@ const AuthDataProvider: React.FC<Propsz> = (props) => {
       });
   }
 
-  return <AuthDataContext.Provider value={{ authData, onLogin, onLogout }} />;
+  return (
+    <AuthDataContext.Provider value={{ authData, onLogin, onLogout }}>
+      {props.children}
+    </AuthDataContext.Provider>
+  );
 };
 
 export const useAuthDataContext = () => useContext(AuthDataContext);

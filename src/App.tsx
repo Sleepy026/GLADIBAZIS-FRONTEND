@@ -18,27 +18,21 @@ const App: React.FC<Props> = () => {
     <div className="outer">
       <Router>
         <Menu></Menu>
-        <AuthDataProvider>
-          <div className="body">
-            <Switch>
-              <Route path="/auth" component={Login}></Route>
-              <PrivateRoute exact path="/" component={Home}></PrivateRoute>
-              <PrivateRoute
-                path="/all_gladi"
-                component={ListView}
-              ></PrivateRoute>
-              <PrivateRoute path="/search" component={Search}></PrivateRoute>
-              <PrivateRoute
-                path="/new_gladi"
-                component={NewGladi}
-              ></PrivateRoute>
-              <PrivateRoute
-                path="/detailed_view/:name"
-                component={DetailedView}
-              ></PrivateRoute>
-            </Switch>
-          </div>
-        </AuthDataProvider>
+        {/* <AuthDataProvider> */}
+        <div className="body">
+          <Switch>
+            <Route path="/auth" component={Login}></Route>
+            <PrivateRoute exact path="/" component={Home}></PrivateRoute>
+            <PrivateRoute path="/all_gladi" component={ListView}></PrivateRoute>
+            <PrivateRoute path="/search" component={Search}></PrivateRoute>
+            <PrivateRoute path="/new_gladi" component={NewGladi}></PrivateRoute>
+            <PrivateRoute
+              path="/detailed_view/:name"
+              component={DetailedView}
+            ></PrivateRoute>
+          </Switch>
+        </div>
+        {/* </AuthDataProvider> */}
       </Router>
     </div>
   );

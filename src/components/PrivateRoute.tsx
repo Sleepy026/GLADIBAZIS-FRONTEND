@@ -5,7 +5,6 @@ import { AuthDataContext } from "../contexts/AuthDataContext";
 
 export const PrivateRoute: React.FC<RouteProps> = ({
   component: Component,
-  user,
   ...rest
 }: any) => {
   const context = useContext(AuthDataContext);
@@ -13,7 +12,11 @@ export const PrivateRoute: React.FC<RouteProps> = ({
     <Route
       {...rest}
       render={(props) =>
-        context.authData ? <Component {...props} /> : <Redirect to="/auth" />
+        context.authData !== {} ? (
+          <Component {...props} />
+        ) : (
+          <Redirect to="/auth" />
+        )
       }
     />
   );
