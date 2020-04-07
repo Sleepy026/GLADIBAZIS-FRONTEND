@@ -12,7 +12,9 @@ const initialAuthData = {};
 interface Propsz {}
 
 const AuthDataProvider: React.FC<Propsz> = (props) => {
-  const [authData, setAuthData] = useState(initialAuthData);
+  const [authData, setAuthData] = useState<
+    firebase.auth.UserCredential | firebase.User | {}
+  >(initialAuthData);
 
   useEffect(() => {
     const currentAuthData = firebase.auth().currentUser;
@@ -27,7 +29,6 @@ const AuthDataProvider: React.FC<Propsz> = (props) => {
       .auth()
       .signInWithPopup(provider)
       .then(function (newAuthData) {
-        console.log(newAuthData);
         setAuthData(newAuthData);
       })
       .catch(function (error) {

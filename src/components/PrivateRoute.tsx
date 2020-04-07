@@ -3,21 +3,12 @@ import { Route, Redirect, RouteProps } from "react-router-dom";
 import { useContext } from "react";
 import { AuthDataContext } from "../contexts/AuthDataContext";
 
-export const PrivateRoute: React.FC<RouteProps> = ({
-  component: Component,
-  ...rest
-}: any) => {
+export const PrivateRoute: React.FC<RouteProps> = ({ component, ...rest }) => {
   const context = useContext(AuthDataContext);
-  return (
-    <Route
-      {...rest}
-      render={(props) =>
-        context.authData !== {} ? (
-          <Component {...props} />
-        ) : (
-          <Redirect to="/auth" />
-        )
-      }
-    />
+  console.log(context.authData);
+  return context.authData ? (
+    <Route {...rest} component={component} />
+  ) : (
+    <Redirect to="/auth" />
   );
 };
