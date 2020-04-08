@@ -53,7 +53,7 @@ const GladiProvider: React.FC<Propsz> = (props) => {
   };
 
   const handleHeightInput = (e: any) => {
-    setSearchHeigth(e.target.value);
+    setSearchHeigth(parseInt(e.target.value));
   };
 
   return (

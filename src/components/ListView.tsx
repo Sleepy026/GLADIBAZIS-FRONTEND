@@ -10,6 +10,7 @@ import ListSubheader from "@material-ui/core/ListSubheader";
 import IconButton from "@material-ui/core/IconButton";
 import InfoIcon from "@material-ui/icons/Info";
 import { GladiContext } from "../contexts/GladiContext";
+import SearchBar from "./SearchBar";
 
 interface Props {}
 
@@ -37,13 +38,7 @@ const ListView: React.FC<Props> = () => {
   const classes = useStyles();
   return (
     <div>
-      <div
-        style={{ backgroundColor: "black", color: "white", fontSize: "50px" }}
-      >
-        <input type="text" name="name" placeholder="Name"></input>
-        <input type="text" name="color" placeholder="Color"></input>
-        <input type="number" name="height" placeholder="Heigth"></input>
-      </div>
+      <SearchBar />
 
       <div className={classes.root}>
         <GridList
@@ -55,7 +50,7 @@ const ListView: React.FC<Props> = () => {
           <GridListTile key="Subheader" cols={3} style={{ height: "auto" }}>
             <ListSubheader component="div">Varieties</ListSubheader>
           </GridListTile>
-          {context.gladiData?.map((gladi) => (
+          {context.filteredGladiData?.map((gladi) => (
             <GridListTile key={gladi.name}>
               <img src={gladi.pictures[0]} alt={gladi.name} />
               <GridListTileBar
