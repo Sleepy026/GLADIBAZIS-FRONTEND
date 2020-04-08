@@ -10,6 +10,7 @@ import Home from "./components/Home";
 import AuthDataProvider from "./contexts/AuthDataContext";
 import Login from "./components/Login";
 import { PrivateRoute } from "./components/PrivateRoute";
+import GladiProvider, { GladiContext } from "./contexts/GladiContext";
 
 interface Props {}
 
@@ -23,11 +24,12 @@ const App: React.FC<Props> = () => {
             <Switch>
               <Route path="/auth" component={Login}></Route>
               <PrivateRoute exact path="/" component={Home}></PrivateRoute>
-              <PrivateRoute
-                path="/all_gladi"
-                component={ListView}
-              ></PrivateRoute>
-              <PrivateRoute path="/search" component={Search}></PrivateRoute>
+              <GladiProvider>
+                <PrivateRoute
+                  path="/all_gladi"
+                  component={ListView}
+                ></PrivateRoute>
+              </GladiProvider>
               <PrivateRoute
                 path="/new_gladi"
                 component={NewGladi}

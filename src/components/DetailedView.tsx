@@ -15,7 +15,7 @@ const DetailedView: React.FC<Props> = (props) => {
   return (
     <div className="flowerContainer">
       <div className="pictures">
-        <img src={flower.pictures[0]} alt="img" />
+        <img src={flower.pictures[0]} alt="img" width="350" height="250" />
       </div>
       <div className="datas">
         <p className="flowerDetail">Name: {flower.name}</p>
