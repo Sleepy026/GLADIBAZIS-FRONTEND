@@ -12,23 +12,23 @@ const ListView: React.FC<Props> = () => {
   useEffect(() => {
     axios
       .get(`http://localhost:8080/all_gladiolus`)
-      .then(res => {
+      .then((res) => {
         setGladiData(res.data);
         console.log(res.data);
       })
-      .catch(error => console.log(error));
+      .catch((error) => console.log(error));
   }, []);
   return (
     <div className="list">
       {gladiData?.map((gladi: GladiDataType) => (
         <div className="card">
-          <img src={gladi.pictures[0]} alt="pic" height="200" width="200" />
+          <img src={gladi.pictures[0]} alt="pic" height="300" width="250" />
           <Link
             className="name"
             key={gladi.name}
             to={{
               pathname: `/detailed_view/${gladi.name}`,
-              state: gladi
+              state: gladi,
             }}
           >
             {gladi.name}

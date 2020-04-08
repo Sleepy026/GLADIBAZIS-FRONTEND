@@ -1,4 +1,8 @@
 .menu {
+  position: sticky;
+  z-index: 1;
+  top: 0;
+  width: 100%;
   background-color: black;
   color: white;
   display: flex;
@@ -49,4 +53,8 @@
 
 .text {
   margin-left: 5px;
+}
+
+.hidden {
+  display: none;
 }

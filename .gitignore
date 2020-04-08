@@ -22,3 +22,8 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .idea/*
+.firebase/**
+.firebaserc
+public/404.html
+public/indexFirebase.html
+src/contexts/MyContext.tsx

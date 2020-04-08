@@ -17,8 +17,8 @@ const App: React.FC<Props> = () => {
   return (
     <div className="outer">
       <Router>
-        <Menu></Menu>
         <AuthDataProvider>
+          <Menu></Menu>
           <div className="body">
             <Switch>
               <Route path="/auth" component={Login}></Route>
