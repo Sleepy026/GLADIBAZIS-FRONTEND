@@ -4,7 +4,10 @@ import axios from "axios";
 
 type ContextProps = {
   gladiData: GladiDataType[] | null;
-  filter: () => void;
+  filteredGladiData: GladiDataType[] | null;
+  handleNameInput: (e: any) => void;
+  handleColorInput: (e: any) => void;
+  handleHeightInput: (e: any) => void;
 };
 
 export const GladiContext = createContext<Partial<ContextProps>>({});
@@ -13,9 +16,13 @@ interface Propsz {}
 
 const GladiProvider: React.FC<Propsz> = (props) => {
   const [gladiData, setGladiData] = useState<GladiDataType[] | null>();
-  const [name, setName] = useState("");
-  const [color, setColor] = useState("");
-  const [heigth, setHeigth] = useState(0);
+  const [filteredGladiData, setFilteredGladiData] = useState<
+    GladiDataType[] | null
+  >();
+  const [searchName, setSearchName] = useState("");
+  const [searchColor, setSearchColor] = useState("");
+  const [searchHeigth, setSearchHeigth] = useState(0);
+
   useEffect(() => {
     axios
       .get(`http://localhost:8080/all_gladiolus`)
@@ -26,10 +33,38 @@ const GladiProvider: React.FC<Propsz> = (props) => {
       .catch((error) => console.log(error));
   }, []);
 
-  function filter(): void {}
+  useEffect(() => {
+    const filteredGladis = gladiData?.filter((gladi) => {
+      return (
+        gladi.name.includes(searchName) ||
+        gladi.color.includes(searchColor) ||
+        gladi.height === searchHeigth
+      );
+    });
+    setFilteredGladiData(filteredGladis);
+  }, [searchName, searchColor, searchHeigth, gladiData]);
+
+  const handleNameInput = (e: any) => {
+    setSearchName(e.target.value);
+  };
+
+  const handleColorInput = (e: any) => {
+    setSearchColor(e.target.value);
+  };
+
+  const handleHeightInput = (e: any) => {
+    setSearchHeigth(e.target.value);
+  };
 
   return (
-    <GladiContext.Provider value={{ gladiData, filter }}>
+    <GladiContext.Provider
+      value={{
+        filteredGladiData,
+        handleNameInput,
+        handleColorInput,
+        handleHeightInput,
+      }}
+    >
       {props.children}
     </GladiContext.Provider>
   );
