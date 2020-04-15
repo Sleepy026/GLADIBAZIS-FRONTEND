@@ -8,6 +8,10 @@ type ContextProps = {
   handleNameInput: (e: any) => void;
   handleColorInput: (e: any) => void;
   handleHeightInput: (e: any) => void;
+  resetState: () => void;
+  getSearchName: string;
+  getSearchColor: string;
+  getSearchHeight: number;
 };
 
 export const GladiContext = createContext<Partial<ContextProps>>({});
@@ -19,9 +23,9 @@ const GladiProvider: React.FC<Propsz> = (props) => {
   const [filteredGladiData, setFilteredGladiData] = useState<
     GladiDataType[] | null
   >();
-  const [searchName, setSearchName] = useState("");
-  const [searchColor, setSearchColor] = useState("");
-  const [searchHeigth, setSearchHeigth] = useState(0);
+  const [searchName, setSearchName] = useState<string>("");
+  const [searchColor, setSearchColor] = useState<string>("");
+  const [searchHeight, setSearchHeight] = useState<number>(NaN);
 
   useEffect(() => {
     axios
@@ -36,13 +40,21 @@ const GladiProvider: React.FC<Propsz> = (props) => {
   useEffect(() => {
     const filteredGladis = gladiData?.filter((gladi) => {
       return (
-        gladi.name.includes(searchName) ||
-        gladi.color.includes(searchColor) ||
-        gladi.height === searchHeigth
+        (gladi.name.toLowerCase().includes(searchName.toLowerCase()) ||
+          !searchName) &&
+        (gladi.color.toLowerCase().includes(searchColor.toLowerCase()) ||
+          !searchColor) &&
+        (gladi.height >= searchHeight || !searchHeight)
       );
     });
     setFilteredGladiData(filteredGladis);
-  }, [searchName, searchColor, searchHeigth, gladiData]);
+  }, [searchName, searchColor, searchHeight, gladiData]);
+
+  const resetState = () => {
+    setSearchName("");
+    setSearchColor("");
+    setSearchHeight(NaN);
+  };
 
   const handleNameInput = (e: any) => {
     setSearchName(e.target.value);
@@ -53,8 +65,14 @@ const GladiProvider: React.FC<Propsz> = (props) => {
   };
 
   const handleHeightInput = (e: any) => {
-    setSearchHeigth(parseInt(e.target.value));
+    setSearchHeight(parseInt(e.target.value));
   };
+
+  const getSearchName = searchName;
+
+  const getSearchColor = searchColor;
+
+  const getSearchHeight = searchHeight;
 
   return (
     <GladiContext.Provider
@@ -63,6 +81,10 @@ const GladiProvider: React.FC<Propsz> = (props) => {
         handleNameInput,
         handleColorInput,
         handleHeightInput,
+        resetState,
+        getSearchName,
+        getSearchColor,
+        getSearchHeight,
       }}
     >
       {props.children}
