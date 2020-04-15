@@ -27,3 +27,4 @@ yarn-error.log*
 public/404.html
 public/indexFirebase.html
 src/contexts/MyContext.tsx
+.vscode/launch.json
