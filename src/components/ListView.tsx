@@ -16,7 +16,7 @@ interface Props {}
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    marginTop: "15px",
+    // marginTop: "15px",
     display: "flex",
     flexWrap: "wrap",
     justifyContent: "space-around",
@@ -38,8 +38,6 @@ const ListView: React.FC<Props> = () => {
   const classes = useStyles();
   return (
     <div>
-      <SearchBar />
-
       <div className={classes.root}>
         <GridList
           cellHeight={350}
@@ -47,8 +45,11 @@ const ListView: React.FC<Props> = () => {
           spacing={8}
           className={classes.gridList}
         >
-          <GridListTile key="Subheader" cols={3} style={{ height: "auto" }}>
+          <GridListTile key="Subheader" cols={5} style={{ height: "auto" }}>
             <ListSubheader component="div">Varieties</ListSubheader>
+            <ListSubheader component="div">
+              <SearchBar />
+            </ListSubheader>
           </GridListTile>
           {context.filteredGladiData?.map((gladi) => (
             <GridListTile key={gladi.name}>

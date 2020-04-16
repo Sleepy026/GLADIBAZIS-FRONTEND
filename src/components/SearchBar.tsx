@@ -7,7 +7,7 @@ interface Props {}
 const SearchBar: React.FC<Props> = () => {
   const context = useContext(GladiContext);
   return (
-    <div style={{ backgroundColor: "black", color: "white", fontSize: "50px" }}>
+    <div style={{ color: "white", fontSize: "50px" }}>
       <input
         type="text"
         name="name"

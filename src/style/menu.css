@@ -1,6 +1,5 @@
 .menu {
-  position: sticky;
-  z-index: 1;
+  position: fixed;
   top: 0;
   width: 100%;
   background-color: black;
@@ -9,6 +8,7 @@
   /* align-items: flex-end; */
   flex-flow: row wrap;
   justify-content: flex-end;
+  overflow: hidden;
 }
 
 .logo {
