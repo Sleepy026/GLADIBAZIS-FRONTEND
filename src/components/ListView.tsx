@@ -38,8 +38,6 @@ const ListView: React.FC<Props> = () => {
   const classes = useStyles();
   return (
     <div>
-      <SearchBar />
-
       <div className={classes.root}>
         <GridList
           cellHeight={350}
@@ -48,7 +46,12 @@ const ListView: React.FC<Props> = () => {
           className={classes.gridList}
         >
           <GridListTile key="Subheader" cols={3} style={{ height: "auto" }}>
-            <ListSubheader component="div">Varieties</ListSubheader>
+            <ListSubheader component="div" style={{ zIndex: 0 }}>
+              Varieties
+            </ListSubheader>
+            <ListSubheader component="div" style={{ zIndex: 0 }}>
+              <SearchBar />
+            </ListSubheader>
           </GridListTile>
           {context.filteredGladiData?.map((gladi) => (
             <GridListTile key={gladi.name}>

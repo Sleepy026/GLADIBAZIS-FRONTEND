@@ -1,14 +1,14 @@
 .menu {
-  position: sticky;
+  position: fixed;
   z-index: 1;
   top: 0;
   width: 100%;
   background-color: black;
   color: white;
   display: flex;
-  /* align-items: flex-end; */
   flex-flow: row wrap;
   justify-content: flex-end;
+  overflow: hidden;
 }
 
 .logo {

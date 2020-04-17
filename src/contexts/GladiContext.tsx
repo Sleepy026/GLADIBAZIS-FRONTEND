@@ -29,7 +29,7 @@ const GladiProvider: React.FC<Propsz> = (props) => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/all_gladiolus`)
+      .get(`http://localhost:8080/gladiolus/all`)
       .then((res) => {
         setGladiData(res.data);
         console.log(res.data);
