@@ -32,10 +32,7 @@ const App: React.FC<Props> = () => {
               <i className="far fa-list-alt"></i>
               <span className="text">List All Varieties</span>
             </Link>
-            {/* <Link className={linkStyle} to="/search">
-              <i className="fas fa-search"></i>
-              <span className="text">Search</span>
-            </Link> */}
+
             <Link className={linkStyle} to="/new_gladi">
               <i className="far fa-plus-square"></i>
               <span className="text">Create New Variety</span>

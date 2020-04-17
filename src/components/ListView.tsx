@@ -38,6 +38,8 @@ const ListView: React.FC<Props> = () => {
   const classes = useStyles();
   return (
     <div>
+      <SearchBar />
+
       <div className={classes.root}>
         <GridList
           cellHeight={350}
